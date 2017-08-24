@@ -1,13 +1,33 @@
-import mongoose from 'mongoose'
+// import mongoose from 'mongoose'
+const mongoose = require('mongoose')
+const bycrypt = require('bycrypt-nodejs')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
-  name: string,
-  email: string,
-  password: string,
-  confirm: string,
+  name: String,
+  email: {type: String, unique: true, lowercase: true},
+  password: String,
 })
+
+userSchema.pre('save', function(next) {
+  const user = this
+  bycrypt.genSalt(10, function(err, salt) {
+    if(err) return next(err)
+    bycrypt.hash(user.password, salt, null, function(err, hash) {
+      if(err) return next(err)
+      user.password = hash
+      next()        
+    })      
+  })
+})
+
+userSchema.methods.comparePassword = function(candidatePassword, cb) {
+  bycrypt.compare(candidatePassword, this.password, function(err, isMatch){
+    if(err) return cb(err)
+    cb(null, isMatch)
+  })
+}
 
 userClass = mongoose.model('User', userSchema)
 
-export default userClass
+module.exports userClass

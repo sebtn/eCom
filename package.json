@@ -36,6 +36,7 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.0.2",
     "express": "^4.15.3",
     "mongoose": "^3.6.20",
