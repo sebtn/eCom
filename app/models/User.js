@@ -1,6 +1,6 @@
 // import mongoose from 'mongoose'
 const mongoose = require('mongoose')
-const bycrypt = require('bycrypt-nodejs')
+const bycrypt = require('bcrypt-nodejs')
 const Schema = mongoose.Schema
 
 const userSchema = new Schema({
@@ -12,9 +12,9 @@ const userSchema = new Schema({
 userSchema.pre('save', function(next) {
   const user = this
   bycrypt.genSalt(10, function(err, salt) {
-    if(err) return next(err)
+    if(err) { return next(err) }
     bycrypt.hash(user.password, salt, null, function(err, hash) {
-      if(err) return next(err)
+      if(err) { return next(err) }
       user.password = hash
       next()        
     })      
@@ -23,11 +23,11 @@ userSchema.pre('save', function(next) {
 
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
   bycrypt.compare(candidatePassword, this.password, function(err, isMatch){
-    if(err) return cb(err)
+    if(err) { return cb(err) }
     cb(null, isMatch)
   })
 }
 
-userClass = mongoose.model('User', userSchema)
+const modelClass = mongoose.model('User', userSchema)
 
-module.exports userClass
+module.exports = modelClass
