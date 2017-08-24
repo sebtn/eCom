@@ -36,7 +36,9 @@
     "webpack": "^2.6.1"
   },
   "dependencies": {
+    "body-parser": "^1.0.2",
     "express": "^4.15.3",
+    "mongoose": "^3.6.20",
     "prop-types": "^15.5.10",
     "react": "15.4.0",
     "react-dom": "15.4.0",

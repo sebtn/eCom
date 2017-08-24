@@ -5,7 +5,9 @@ import {connect} from 'react-redux'
 class Main extends Component {
   render() {
     return (
-      <h1>This is Main routed using store and provider!</h1>
+      <div>
+        <h3>This is Main routed using store and provider!</h3>
+      </div>
     )
   }
 }
