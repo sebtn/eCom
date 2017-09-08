@@ -5,34 +5,34 @@ const Schema = mongoose.Schema
 
 const userSchema = new Schema({
   name: String,
-  email: {type: String, unique: true, lowercase: true},
+  email: { type: String, unique: true, lowercase: true },
   password: String,
   profile: {
-    name: {type: String, default: ''},
-    picture: {type: String, defualt: ''}
+    name: { type: String, default: '' },
+    picture: { type: String, defualt: '' }
   },
   address: String,
   history: [{
     date: Date,
-    paid: {type: Number, default: 0}
-  }] 
+    paid: { type: Number, default: 0 }
+  }]
 })
 
-userSchema.pre('save', function(next) {
+userSchema.pre('save', function (next) {
   const user = this
-  bycrypt.genSalt(10, function(err, salt) {
-    if(err) { return next(err) }
-    bycrypt.hash(user.password, salt, null, function(err, hash) {
-      if(err) { return next(err) }
+  bycrypt.genSalt(10, function (err, salt) {
+    if (err) { return next(err) }
+    bycrypt.hash(user.password, salt, null, function (err, hash) {
+      if (err) { return next(err) }
       user.password = hash
-      next()        
-    })      
+      next()
+    })
   })
 })
 
-userSchema.methods.comparePassword = function(candidatePassword, cb) {
-  bycrypt.compare(candidatePassword, this.password, function(err, isMatch){
-    if(err) { return cb(err) }
+userSchema.methods.comparePassword = function (candidatePassword, cb) {
+  bycrypt.compare(candidatePassword, this.password, function (err, isMatch) {
+    if (err) { return cb(err) }
     cb(null, isMatch)
   })
 }

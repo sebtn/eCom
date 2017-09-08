@@ -6,7 +6,10 @@ class Main extends Component {
   render() {
     return (
       <div>
-        <h3>This is Main routed using store and provider!</h3>
+        <h3>Shop smart</h3>
+        <b><h5>Start search</h5></b>
+        <b><h5>Items on cart in th whole page</h5></b>
+        <b><h5>Smart cart</h5></b>
       </div>
     )
   }

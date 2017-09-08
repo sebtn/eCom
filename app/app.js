@@ -1,11 +1,11 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
-import {Provider} from 'react-redux'
-import {createStore, applyMiddleware, compose} from 'redux'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware, compose } from 'redux'
 import thunk from 'redux-thunk'
 
-import  './styles/app.scss' 
+import './styles/app.scss'
 import router from './router/index'
 import reducers from './reducers/index'
 
@@ -17,5 +17,4 @@ ReactDOM.render(
   <Provider store={store}>
     {router}
   </Provider>
-
-,document.getElementById('root'))
+, document.getElementById('root'))

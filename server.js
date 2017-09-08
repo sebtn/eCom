@@ -20,6 +20,7 @@ mongoose.connect('mongodb://localhost:eCom/eCom', function(err){
   if (err) { console.log(err) } 
   else     { console.log('Connected to Db') }
 })
+
 /*--------*/
 /* Routes */
 /*--------*/
@@ -31,13 +32,13 @@ app.post('/create-user', function(req, res, next) {
   user.email = req.body.email
 
   user.save(function(err) { 
-    if(err) next(err)
+    if(err) return next(err)
       res.json('Created user with Succes')
   })
 })
 
 /*------------------------*/
-// app.use(express.static('public')) // react html entry
+app.use(express.static('public')) // react html entry
 app.listen(3000, serverExpressFn = () => {
 	console.log('Express is now running your //localhost:3000')
 })
