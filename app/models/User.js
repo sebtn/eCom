@@ -7,6 +7,15 @@ const userSchema = new Schema({
   name: String,
   email: {type: String, unique: true, lowercase: true},
   password: String,
+  profile: {
+    name: {type: String, defualt: ''},
+    picture: {type: String, defualt: ''}
+  },
+  address: String,
+  history: [{
+    date: Date,
+    paid: {type: Number, defualt: 0}
+  }] 
 })
 
 userSchema.pre('save', function(next) {
