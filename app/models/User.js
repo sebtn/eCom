@@ -1,9 +1,9 @@
 // import mongoose from 'mongoose'
-var mongoose = require('mongoose')
-var bycrypt = require('bcrypt-nodejs')
-var Schema = mongoose.Schema
+const mongoose = require('mongoose')
+const bycrypt = require('bcrypt-nodejs')
+const Schema = mongoose.Schema
 
-var UserSchema = new Schema({
+const UserSchema = new Schema({
   email: { type: Schema.Types.String, unique: true, lowercase: true },
   password: Schema.Types.String,
   profile: {
@@ -18,7 +18,7 @@ var UserSchema = new Schema({
 })
 
 UserSchema.pre('save', function (next) {
-  var user = this
+  const user = this
   if (!user.isModified('password')) return next()
   bycrypt.genSalt(10, function (err, salt) {
     if (err) return next(err)
