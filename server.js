@@ -1,13 +1,13 @@
 const express = require('express')
 const morgan = require('morgan')
-const app = express()
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const User = require('./app/models/User.js')
 
+const User = require('./app/models/User.js')
 // const router = require('./router')
 
-
+/*App configuration */
+const app = express()
 app.use(morgan('dev'))
 app.use(bodyParser.json()) // jsondata format
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -16,11 +16,10 @@ app.use(bodyParser.urlencoded({ extended: true }))
 /*app.use(function(err, req, res, next){
   res.status(422).send({error: err.message})
 })*/
-const uri = 'mongodb://localhost/eCom'
 
-const options = {
-  useMongoClient: true,
-}
+/*----- MONGO -----*/
+const uri = 'mongodb://localhost/eCom'
+const options = { useMongoClient: true }
 
 mongoose.Promise = global.Promise
 mongoose.connect(uri, options, function (err) {
@@ -28,9 +27,7 @@ mongoose.connect(uri, options, function (err) {
   else { console.log('Connected to Db') }
 })
 
-/*--------*/
-/* Routes */
-/*--------*/
+/*--- Routes ---*/
 // router(app)
 app.post('/create-user', function (req, res, next) {
   const user = new User()
@@ -45,9 +42,9 @@ app.post('/create-user', function (req, res, next) {
 
 })
 
-/*------------------------*/
+/*----- App starter -------------*/
 // react html entry
-app.use(express.static('public')) 
+app.use(express.static('public'))
 app.listen(3000, serverExpressFn = () => {
   console.log('Express is now running your //localhost:3000')
 })
